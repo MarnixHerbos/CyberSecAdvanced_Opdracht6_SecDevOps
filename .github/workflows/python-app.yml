@@ -7,7 +7,9 @@ on:
   push:
     branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "dev" ]
+  schedule:
+    - cron: '0 0 * * 0'  # Elke zondag om middernacht
 
 permissions:
   contents: read
@@ -33,6 +35,10 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Static Analysis (SAST)
+      run: |
+        pip install bandit
+        bandit -r .
     - name: Test with pytest
       run: |
         pytest /

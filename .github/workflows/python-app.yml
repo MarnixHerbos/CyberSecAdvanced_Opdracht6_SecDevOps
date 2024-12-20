@@ -39,5 +39,9 @@ jobs:
       run: |
         pip install bandit
         bandit -r .
+    - name: Dependency Check
+      run: |
+        pip install safety
+        safety check
     
 

@@ -1,6 +1,6 @@
 import requests
 
-password = "uiopuiop"
+#password = "uiopuiop"
 
 requests.get("http://example.com", verify=False)
 
